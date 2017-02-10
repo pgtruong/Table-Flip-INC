@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour {
     //public AudioManager audioManager;
     public bool inputActive = true;
     public int gold;
+    float goldMultiplier = 1;
+    public int tablesFlipped = 0;
+
 
     void Awake()
     {
@@ -21,7 +24,17 @@ public class GameManager : MonoBehaviour {
 
     public void changeGold(int delta)
     {
-        gold += delta;
+        gold += Mathf.RoundToInt(delta * goldMultiplier);
+    }
+
+    public void setMultiplier(float mult)
+    {
+        goldMultiplier = mult;
+    }
+
+    public void incrementTable(int delta = 1)
+    {
+        tablesFlipped += delta;
     }
 
 }

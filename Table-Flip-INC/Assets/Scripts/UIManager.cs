@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
-    public Text score;
+    public Text gold;
+    public Text tablesFlipped;
 
     void Update()
     {
-        score.text = "Score: " + GameManager.instance.gold.ToString();
+        gold.text = "Gold: " + GameManager.instance.gold.ToString();
+        tablesFlipped.text = "Tables Flipped: " + GameManager.instance.tablesFlipped.ToString();
     }
 }

@@ -9,7 +9,8 @@ public class InputManager : MonoBehaviour {
     {
         if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetMouseButtonDown(0))
         {
-            GameManager.instance.changeGold(1);
+            GameManager.instance.changeGold(100);
+            GameManager.instance.incrementTable();  
         }
     }
 }

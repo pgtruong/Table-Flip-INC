@@ -6,9 +6,16 @@ public class TableScript : MonoBehaviour {
 
     bool flip = false;
     public GameObject table;
+    Vector3 endPos;
 
     void Update()
     {
+        if (!flip)
+            endPos = new Vector3(11, Random.Range(-4, -15), 0);
+        Vector3 center = (transform.position + endPos) * 0.5f;
+        center -= new Vector3(0, 1, 0);
+        Vector3 startRelCenter = transform.position - center;
+        Vector3 endRelCenter = endPos - center;
         if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetMouseButtonDown(0) && !flip)
         {
             flip = true;
@@ -16,8 +23,10 @@ public class TableScript : MonoBehaviour {
             temp.name = "Table";
         }                    
         if (flip)
-        {            
-            transform.position = Vector3.Slerp(transform.position, new Vector3(11, -2, 0), Time.deltaTime * 3f);
+        {
+            transform.Rotate(new Vector3(0,0,-1) * 7);
+            transform.position = Vector3.Slerp(startRelCenter, endRelCenter, Time.deltaTime * 1.5f);
+            transform.position += center;
             if (!GetComponent<SpriteRenderer>().isVisible)
             {
                 Destroy(gameObject);

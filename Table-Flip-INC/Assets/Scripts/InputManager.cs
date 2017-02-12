@@ -5,6 +5,8 @@ using UnityEngine;
 public class InputManager : MonoBehaviour {
 
     public bool finger = false;
+    public AudioClip track1;
+    public AudioClip track2;
     
     void Update()
     {
@@ -20,6 +22,8 @@ public class InputManager : MonoBehaviour {
                 finger = false;
                 GameManager.instance.changeGold(100);
                 GameManager.instance.incrementTable();
+                if (track1 && track2 && AudioManager.instance.GetMusicClipName() == track1.name)
+                    AudioManager.instance.PlayMusic(track2);
             }
         }
 
@@ -28,6 +32,8 @@ public class InputManager : MonoBehaviour {
         {
             GameManager.instance.changeGold(100);
             GameManager.instance.incrementTable();
+            if (track1 && track2 && AudioManager.instance.GetMusicClipName() == track1.name)
+                AudioManager.instance.PlayMusic(track2);
         }
     }
 }

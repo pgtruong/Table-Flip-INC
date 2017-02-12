@@ -7,7 +7,10 @@ public class TableScript : MonoBehaviour {
     bool flip = false;
     public GameObject table;
     Vector3 endPos;
-    bool finger = false; 
+    bool finger = false;
+    static int tableCount;
+    public AudioClip track1;
+    public AudioClip track2;
 
     void Start()
     {
@@ -15,7 +18,10 @@ public class TableScript : MonoBehaviour {
     }
 
     void Update()
-    {          
+    {
+        if (tableCount == 0 && track1 & track2 && AudioManager.instance.GetMusicClipName() == track2.name)
+            AudioManager.instance.PlayMusic(track1);
+
         //Sets Slerp Arc
         Vector3 center = (transform.position + endPos) * 0.5f;
         center -= new Vector3(0, 1, 0);
@@ -33,6 +39,7 @@ public class TableScript : MonoBehaviour {
             {
                 flip = true;
                 GameObject temp = Instantiate(table);
+                tableCount++;
                 temp.name = "Table";
             }
         }
@@ -41,6 +48,7 @@ public class TableScript : MonoBehaviour {
         {
             flip = true;
             GameObject temp = Instantiate(table);
+            tableCount++;
             temp.name = "Table";
         }
                            
@@ -52,6 +60,7 @@ public class TableScript : MonoBehaviour {
             if (!GetComponent<SpriteRenderer>().isVisible)
             {
                 Destroy(gameObject);
+                tableCount--;
             }
         }
     }
